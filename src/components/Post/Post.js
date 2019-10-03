@@ -5,6 +5,7 @@ import FavoriteIcon from 'react-icons/lib/md/favorite-outline';
 import MessageIcon from 'react-icons/lib/md/mail-outline';
 import MasterControlIcon from 'react-icons/lib/md/more-vert';
 
+
 import './Post.css';
 
 import Edit from './Edit/Edit';
@@ -50,10 +51,12 @@ export default class Post extends Component {
   }
 
   render() {
+
     // This is destructuring! You can also think of it as being written as so:
       // const editing = this.state.editing
       // const showMasterMenu = this.state.showMasterMenu
     const { editing, showMasterMenu } = this.state;
+    const { text, date } = this.props;
 
     return (
       // Main body of post
@@ -79,7 +82,7 @@ export default class Post extends Component {
           <span className="Post__name">DevMountain</span>
           <span className="Post__handle">@DevMountain</span>
 
-          <span className="Post__date">- POST DATE GOES HERE</span>
+          <span className="Post__date">{ date }</span>
         </div>
 
         {/* This is where the text goes. Notice the turnary statement. The turnary statement decides to display either the text OR the editor view
@@ -95,10 +98,12 @@ export default class Post extends Component {
             // This has been pulled off of this.state via destructuring
             editing
             ?
-              <Edit text=""
-                    hideEdit={ this.hideEdit } />
+              <Edit text={ this.props.text }
+              id={ this.props.id }
+                    hideEdit={ this.hideEdit } 
+                    updatePostFn= { this.props.updatePostFn }/>
             :
-              <span className="Post__text">POST TEXT GOES HERE</span>
+              <span className="Post__text">{ text }</span>
           }
         </div>
 
